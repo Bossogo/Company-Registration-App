@@ -7,6 +7,7 @@ import ConfirmationForm from "./Forms/ConfirmationForm";
 export default function FormManager({ onSwitch }) {
   const [pageIndex,setPageIndex] = useState(0)
   const [isValid, setValidity] = useState(0)
+  const [isCurrentValid, setIsCurrentValid] = useState(0)
   const [pullData, setPullData] =useState(false)
   const [formDataSummary, setDataSummary] = useState(
     {
@@ -24,9 +25,8 @@ export default function FormManager({ onSwitch }) {
   const policyHandleInput = e => {
     const target = e.target
    
-    setChecked(true)
+    setChecked(prev => !prev)
     if (target.checked) {
-      console.log("continu");
       setValidity(1)
       return;
     }
@@ -37,21 +37,41 @@ export default function FormManager({ onSwitch }) {
     setDataSummary(prev => ({...prev, ...data}))
   }
   const errorHandler = (validity) => {
-   setValidity(validity)
+   setIsCurrentValid(validity)
   }
 
   useEffect(() => {
     onSwitch(pageIndex)
-    if(pageIndex == 3 && checked){
-      setValidity(1)
-    } else{
+    if(pageIndex == 3 ){
+      if(checked){
+        setValidity(1)
+      }
+      else{
+        console.log("setting to 0");
       setValidity(0)
-    }
+      }
+    } 
     if(pageIndex == 4){
       console.log(formDataSummary)
     }
   }, [pageIndex]);
 
+  useEffect(() => {
+    if(pageIndex === 3){
+      if(!checked){
+        setValidity(0);
+        return;
+      }
+      setValidity(1);
+    }
+    console.log(checked)
+  }, [checked])
+  
+  useEffect(() => {
+    if(!isCurrentValid){setValidity(0);return}
+    setValidity(1)
+  }, [isCurrentValid])
+  
   const validate = e => {
     e.preventDefault()
 
@@ -72,7 +92,6 @@ export default function FormManager({ onSwitch }) {
   const goBack = e =>{
     setPageIndex(prev => prev-1)
     setValidity(1)
-    console.log(isValid);
     }
 
   
@@ -88,7 +107,7 @@ export default function FormManager({ onSwitch }) {
 
 
         <div className="form-btns container m-0 p-0" style={pageIndex === 3?{display: "flex", justifyContent: "space-between"}:{display: "flex", justifyContent: "space-between"}}>
-          <div className={(pageIndex !== 3?"d-none":"")}>
+          <div className={pageIndex !== 3?"d-none":""}>
             <input onClick={policyHandleInput} className="" type="checkbox" id="policy" required/>
             <label className="ms-1" for="policy">Please accept the </label><a href="#">privacy policy...</a>
           </div>
