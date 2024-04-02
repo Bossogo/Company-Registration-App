@@ -1,5 +1,11 @@
 import { useState, useEffect } from "react";
 
+/**
+  **The Representative component is a form that collects the details of a company representative.
+  *TODO: Hide the form when the display prop is set to none
+  *!Deprecate the use of the formIsValid prop
+*/
+
 export default function Representative({display, onError, toUpdate, shouldUpdate}) {
   const [formIsValid, setFormIsValid] = useState(0)
   const [formData, setFormData] = useState({})

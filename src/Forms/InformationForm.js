@@ -8,7 +8,8 @@ export default function InformationForm({display, onError, toUpdate, shouldUpdat
       companyName:"empty",
       industry:"empty",
       dateOfIncorp:"empty",
-      country: "empty"
+      country: "empty",
+      other: null
     }
   )
   const [hideOther, sethideOther] = useState(true)
@@ -28,7 +29,6 @@ export default function InformationForm({display, onError, toUpdate, shouldUpdat
     const target = e.target
     console.log(target.value);
     setFormData(prev => ({...prev, industry: target.value}));
-    setFormData(prev => ({...prev, other: null}));
 
     if (target.validity.valid) {
       setFormErrors(prev => ({...prev, industry: null}));
@@ -108,7 +108,11 @@ export default function InformationForm({display, onError, toUpdate, shouldUpdat
     if(hideOther){
       setFormErrors(prev => ({...prev, other: null}))
     } else{
-      setFormIsValid(areInputsValid())
+        if(formData.other){
+          setFormErrors(prev => ({...prev, other: null}))
+          return
+        }
+        setFormErrors(prev => ({...prev, other: "empty"}))
     }
   }, [hideOther])
   
