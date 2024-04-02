@@ -37,15 +37,12 @@ export default function FormManager({ onSwitch }) {
     setDataSummary(prev => ({...prev, ...data}))
   }
   const errorHandler = (validity) => {
-   setIsCurrentValid(validity)
+   setValidity(validity)
   }
 
   useEffect(() => {
     onSwitch(pageIndex)
-    if(isCurrentValid){
-      setValidity(1)
-    }
-    if(pageIndex == 3 ){
+    if(pageIndex === 3 ){
       if(checked){
         setValidity(1)
       }
@@ -53,7 +50,7 @@ export default function FormManager({ onSwitch }) {
       setValidity(0)
       }
     } 
-    if(pageIndex == 4){
+    if(pageIndex === 4){
       console.log(formDataSummary)
     }
   }, [pageIndex]);
@@ -69,8 +66,7 @@ export default function FormManager({ onSwitch }) {
   }, [checked])
   
   useEffect(() => {
-    if(!isCurrentValid){setValidity(0);return}
-    setValidity(1)
+    setValidity(isCurrentValid)
   }, [isCurrentValid])
   
   const validate = e => {
@@ -113,7 +109,7 @@ export default function FormManager({ onSwitch }) {
             <label className="ms-1" for="policy">Please accept the </label><a href="#">privacy policy...</a>
           </div>
           <div>
-            <button type="submit" className={"btn btn-primary gradient " + (!isValid?"disabled ":"") +(pageIndex === 4?"d-none":"")}
+            <button type="submit" className={"btn btn-primary gradient " + ((!isValid)?"disabled ":"") +(pageIndex === 4?"d-none":"")}
               style={{order:1}}>{pageIndex === 3?"Register":"Proceed"}</button>
             { pageIndex > 0?
               <button type="button" onClick={goBack} className="btn btn-outline-info ms-3">Back</button>

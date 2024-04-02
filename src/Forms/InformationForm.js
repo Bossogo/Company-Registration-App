@@ -30,8 +30,6 @@ export default function InformationForm({display, onError, toUpdate, shouldUpdat
     const target = e.target
     
     setFormData(prev => ({...prev, industry: target.value}));
-
-    
     if (target.validity.valid) {
       setFormErrors(prev => ({...prev, industry: null}));
       return;
@@ -88,13 +86,6 @@ export default function InformationForm({display, onError, toUpdate, shouldUpdat
   }, [formIsValid])
   
   useEffect(() => {
-    if(formData.industry == "Other"){
-      if(formData.other){
-        setFormIsValid(true)
-      }else{
-        setFormIsValid(false)
-      }
-    } 
 
     if(!hideOther){
       setFormData(prev => ({...prev, other: otherInput.current.value}));
@@ -125,7 +116,12 @@ export default function InformationForm({display, onError, toUpdate, shouldUpdat
       setFormErrors(prev => ({...prev, other: null}))
       setFormData(prev => ({...prev, other: ""}));
     } else{
-      setFormData(prev => ({...prev, other: otherInput.current.value}));
+      const other = otherInput.current.value
+      if(other){
+        setFormData(prev => ({...prev, other: otherInput.current.value}));
+        return
+      }
+      setFormErrors(prev => ({...prev, other: "empty"}))
     }
   }, [hideOther])
   

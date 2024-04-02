@@ -17,12 +17,8 @@ export default function PasswordForm({display, onError}) {
 
     if (target.validity.valid) {
       setFormErrors(prev => ({...prev, password: null}));
-      if(target.value === formData.confirmPassword){
-        setFormErrors(prev => ({...prev, matching: null}))
-      }
       return;
     }
-    setFormErrors(prev => ({...prev, matching: "false"}))
     setFormErrors(prev => ({...prev, password: 'error message'}))
   }
   const pwordConfirmHandleInput = e => {
@@ -30,21 +26,16 @@ export default function PasswordForm({display, onError}) {
    
     setFormData(prev => ({...prev, confirmPassword: target.value}));
 
-    if(formData.password === target.value){
-      if (target.validity.valid) {
-        setFormErrors(prev => ({...prev, confirmPassword: null}));
-        if(target.value === formData.password){
-          setFormErrors(prev => ({...prev, matching: null}))
-        }
-        return;
-      }
+    if (target.validity.valid) {
+      setFormErrors(prev => ({...prev, confirmPassword: null}));
+      return
     }
-    setFormErrors(prev => ({...prev, matching: "false"}))
     setFormErrors(prev => ({...prev, confirmPassword: 'error message'}))
   }
   const areInputsValid = () => {
     if(Object.values(formErrors).every((value) => {return value === null})) {
       return 1;
+      
     }
     else{
       return 0;
@@ -55,14 +46,8 @@ export default function PasswordForm({display, onError}) {
   }, [formIsValid])
   
   useEffect(() => {
-    if(formData.password && formData.confirmPassword){
-      if(formData.password === formData.confirmPassword){
-        setFormIsValid(true)
-      }else{
-        setFormIsValid(false)
-      }
-    } 
-    if(display ===""){
+    
+    if(display ===""){ 
       onError(formIsValid)
     }
   }, [display])
@@ -71,6 +56,13 @@ export default function PasswordForm({display, onError}) {
     setFormIsValid(areInputsValid())
   },[formErrors])
 
+  useEffect(() => {
+
+    if(formData.password === formData.confirmPassword){
+      setFormErrors(prev=>({...prev, matching: null}))
+    }
+  }, [formData])
+  
   
   return (
     <div className={display}>
