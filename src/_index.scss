@@ -1,0 +1,156 @@
+$title: #4D6181;
+$white: #FFFFFF;
+$gradient-1: #1C2B3D;
+$gradient-2: #2D486A;
+$weakline: #E0E0E0;
+$btn-inactive: #B9C4D5;
+$btn-active: #7198C8;
+$light-text: #A4A8B2;
+$help-btn: #0D2856;
+$link: #7095C3;
+$info: #90ADD1;
+body{
+    background-color: black;
+    color: white;
+    background-image: linear-gradient(90deg, $gradient-1, $gradient-2);
+    display: flex;
+    flex-direction: column;
+    justify-content:center;
+    align-items: center;
+}
+  
+
+
+.content-container{
+    width:60vw;
+    
+    .logo{
+        width: 180px;
+        height: 52px;
+        background-image: url("../public/images/Ethics_logo.png");  
+    }
+    .content{
+        width: 100%;
+        height: 90%;
+        display: flex;
+        .page-index{
+            width: 10%;
+            height: 50%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            
+            button{
+                cursor:default;
+                color: $white;
+                width: 50px;
+                height: 50px;
+                border-radius: 50%;
+                background-color: $btn-inactive;
+                border:none;
+                
+            }
+            div.line{
+                width: 1px;
+                height: 1rem;
+                background-color: $light-text;
+            }
+            button.active{
+                background-color: $btn-active;
+            }
+        }
+        .static-form{
+            width: 80%;
+            height: 100%;
+            background-color: $white;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            border-radius: 0.3rem;
+            .title-bar{
+                color: $title;
+                min-height: 12.5%;
+                width:80%;
+            }
+            .dynamic-form{
+                width: 80%;
+                .page{
+                    border-bottom: 0.5px solid $weakline;
+                    .row{
+                        border-top: 0.5px solid $weakline;
+                        .col{
+                            display: flex;
+                            align-items: center;
+                        }
+                        .col-end{
+                            justify-content: flex-end;
+                        }
+                    }
+                    label{
+                        width:100%;
+                    }
+                    label::after{
+                        content: " *";
+                        color:red;
+                    }
+                    input.invalid{
+                        border-color:rgb(133, 3, 3);             
+                    }
+                }
+                
+                button.gradient{
+                    background-image: linear-gradient(90deg, $gradient-1, $gradient-2);
+                }
+                
+                input{
+                    color:$primary;
+                }
+
+                .form-btns{
+                    div{
+                        a{
+                            text-decoration: none;
+                            color:$link;
+                        }
+                        a:before{
+                            content:" "
+                        }
+                    }
+                }
+            }
+            
+        }
+    }
+    .success-page{
+        background-color: white;
+        border-radius: 0.3rem;
+        width:700px;
+        height:600px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        .content{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            width: 50%;
+            p{
+                text-align: center;
+            }
+        }
+    }
+}
+
+.btn-div{
+    position:absolute;
+    bottom: 20px;
+    right: 20px;
+    button{
+        background-color: $help-btn;
+        width:70px;
+        height:40px;
+        border-radius: 45%;
+        box-shadow: #4D6181;
+    }
+}
