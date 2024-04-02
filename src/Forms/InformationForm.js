@@ -118,7 +118,7 @@ export default function InformationForm({display, onError, toUpdate, shouldUpdat
       sethideOther(true)
     }
     setFormIsValid(areInputsValid())
-  }, [formData])
+  }, [formData]) 
   
   useEffect(() => {
     if(hideOther){
@@ -126,7 +126,6 @@ export default function InformationForm({display, onError, toUpdate, shouldUpdat
       setFormData(prev => ({...prev, other: ""}));
     } else{
       setFormData(prev => ({...prev, other: otherInput.current.value}));
-      
     }
   }, [hideOther])
   
