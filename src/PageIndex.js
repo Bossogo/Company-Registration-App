@@ -8,7 +8,7 @@ const PageIndex = ({index}) => {
   }, [index])
   
   return (
-    <div className="page-index me-5">   
+    <div className="page-index col-0 col-lg-1 d-lg-flex d-md-none d-sm-none d-none">   
       <button className={currPage === 1? "active": null} type="button">1</button>
       <div className="line"></div>
       <button className={currPage === 2? "active": null}>2</button>

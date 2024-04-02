@@ -64,7 +64,6 @@ export default function FormManager({ onSwitch }) {
       }
       setValidity(1);
     }
-    console.log(checked)
   }, [checked])
   
   useEffect(() => {

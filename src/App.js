@@ -13,19 +13,19 @@ export default function App() {
   <>
     <div className="content-container mt-4">
       <div className="logo"> </div>
-      <div className={"content mt-2 " + (pageIndex !== 4?"":"d-none")}>
+      <div className={"content mt-2 row" + (pageIndex !== 4?"":"d-none")}>
       
-          <PageIndex index={pageIndex}/>
+        <PageIndex index={pageIndex}/>
     
-        <div className="static-form pt-5">
+        <div className="static-form pt-5 col-lg-9 col-12 col-md-12 col-sm-12 ms-lg-5 ms-0">
           <div className="title-bar">
             <h4 className=" border-2 border-bottom border-primary pb-lg-2 pb-2">Company Registration</h4>
           </div>
         
             <FormManager onSwitch={switchHandler} />
-        </div>
-       
+        </div> 
       </div>
+
       <div className={"success-page mt-2 "+(pageIndex !== 4?"d-none":"")}>
         <div className="content">
           <img src="/images/success.PNG" alt="Imag" style={{width:100 + "px", height:86 +"px"}}/>

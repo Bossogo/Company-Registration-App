@@ -10,7 +10,7 @@ body {
 }
 
 .content-container {
-  width: 60vw;
+  min-width: 60vw;
 }
 .content-container .logo {
   width: 180px;
@@ -20,7 +20,7 @@ body {
 .content-container .content {
   width: 100%;
   height: 90%;
-  display: flex;
+  margin: 0;
 }
 .content-container .content .page-index {
   width: 10%;
@@ -47,21 +47,21 @@ body {
   background-color: #7198C8;
 }
 .content-container .content .static-form {
-  width: 80%;
   height: 100%;
   background-color: #FFFFFF;
   display: flex;
   flex-direction: column;
   align-items: center;
   border-radius: 0.3rem;
+  padding: 0;
 }
 .content-container .content .static-form .title-bar {
   color: #4D6181;
   min-height: 12.5%;
-  width: 80%;
+  width: 85%;
 }
 .content-container .content .static-form .dynamic-form {
-  width: 80%;
+  width: 85%;
 }
 .content-container .content .static-form .dynamic-form .page {
   border-bottom: 0.5px solid #E0E0E0;
