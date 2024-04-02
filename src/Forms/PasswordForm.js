@@ -55,6 +55,13 @@ export default function PasswordForm({display, onError}) {
   }, [formIsValid])
   
   useEffect(() => {
+    if(formData.password && formData.confirmPassword){
+      if(formData.password === formData.confirmPassword){
+        setFormIsValid(true)
+      }else{
+        setFormIsValid(false)
+      }
+    } 
     if(display ===""){
       onError(formIsValid)
     }

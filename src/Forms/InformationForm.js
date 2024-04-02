@@ -12,6 +12,8 @@ export default function InformationForm({display, onError, toUpdate, shouldUpdat
     }
   )
   const [hideOther, sethideOther] = useState(true)
+  const otherInput = useRef()
+
   const companyNameHandleInput = e => {
     const target = e.target
    
@@ -26,10 +28,10 @@ export default function InformationForm({display, onError, toUpdate, shouldUpdat
 
   const industryHandleInput = e => {
     const target = e.target
-    console.log(target.value);
+    
     setFormData(prev => ({...prev, industry: target.value}));
-    setFormData(prev => ({...prev, other: null}));
 
+    
     if (target.validity.valid) {
       setFormErrors(prev => ({...prev, industry: null}));
       return;
@@ -86,9 +88,22 @@ export default function InformationForm({display, onError, toUpdate, shouldUpdat
   }, [formIsValid])
   
   useEffect(() => {
+    if(formData.industry == "Other"){
+      if(formData.other){
+        setFormIsValid(true)
+      }else{
+        setFormIsValid(false)
+      }
+    } 
+
+    if(!hideOther){
+      setFormData(prev => ({...prev, other: otherInput.current.value}));
+    }
+
     if(display ===""){
       onError(formIsValid)
     }
+    
   }, [display])
 
   
@@ -97,18 +112,21 @@ export default function InformationForm({display, onError, toUpdate, shouldUpdat
   },[formErrors])
 
   useEffect(() => {
-    if(formData.industry == "Other" || formData.industry == "other"){
+    if(formData.industry == "Other"){
       sethideOther(false)
     } else{
       sethideOther(true)
     }
+    setFormIsValid(areInputsValid())
   }, [formData])
   
   useEffect(() => {
     if(hideOther){
       setFormErrors(prev => ({...prev, other: null}))
+      setFormData(prev => ({...prev, other: ""}));
     } else{
-      setFormIsValid(areInputsValid())
+      setFormData(prev => ({...prev, other: otherInput.current.value}));
+      
     }
   }, [hideOther])
   
@@ -138,7 +156,7 @@ export default function InformationForm({display, onError, toUpdate, shouldUpdat
         </select>
 
       <label className={"form-label " + (hideOther?"d-none":"")} htmlFor="other">Other</label>
-      <input className={"form-control mb-3 " + (hideOther?"d-none":"")} onChange={otherHandleInput} 
+      <input className={"form-control mb-3 " + (hideOther?"d-none":"")} ref = {otherInput} onChange={otherHandleInput} 
         pattern="[A-Za-z]+" id="other" name="other" type="text" placeholder="Other" required/>
        
       <label className="form-label" htmlFor="industry">Date of Incorporation</label>

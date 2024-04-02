@@ -42,12 +42,14 @@ export default function FormManager({ onSwitch }) {
 
   useEffect(() => {
     onSwitch(pageIndex)
+    if(isCurrentValid){
+      setValidity(1)
+    }
     if(pageIndex == 3 ){
       if(checked){
         setValidity(1)
       }
-      else{
-        console.log("setting to 0");
+      else{ 
       setValidity(0)
       }
     } 
@@ -64,7 +66,6 @@ export default function FormManager({ onSwitch }) {
       }
       setValidity(1);
     }
-    console.log(checked)
   }, [checked])
   
   useEffect(() => {
