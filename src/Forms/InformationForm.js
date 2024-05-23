@@ -140,7 +140,7 @@ export default function InformationForm({display, onError, toUpdate, shouldUpdat
       <input className="form-control mb-3" onChange={companyNameHandleInput} 
         pattern="[A-Za-z]+" id="companyName" name="companyName" type="text" placeholder="Company name" required/>
 
-      <label className="form-label" for="industry">Industry</label>
+      <label className="form-label" htmlFor="industry">Industry</label>
         <select id="industry" name="industry" className="form-control mb-3" onChange={industryHandleInput} required>  
           <option disabled selected></option>
           <option value="Agriculture">Agriculture</option>
